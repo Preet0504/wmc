@@ -22,5 +22,13 @@ except Exception as e:
 def first():
     return render_template('first.html')
 
+@app.route("/login")
+def login():
+    return render_template('login.html')
+
+@app.route("/register")
+def register():
+    return render_template('register.html')
+
 app.debug = True
 app.run()
