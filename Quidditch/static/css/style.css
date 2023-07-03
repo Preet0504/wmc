@@ -1,6 +1,6 @@
 body{
     margin: 0;
-
+    background: linear-gradient(rgb(0, 0, 0), rgb(3, 0, 18));
 
 }
 
@@ -12,7 +12,9 @@ body{
     justify-content: center;
     align-items: center;
     text-align: center;
+    z-index: -1;
 }
+
 
 .top-container h1{
     color: white;
@@ -24,6 +26,9 @@ body{
 .text{
     margin: 50px 5%;
     font-family: sans-serif;
+    font-size: larger;
+    
+    color: goldenrod;
 }
 
 .navbar{
@@ -61,10 +66,12 @@ body{
 
 .navbar.active{
     background-color: black;
+    height: 120px;
 }
 
 .navbar.active ul li a{
     color: white;
+    text-decoration: underline;
 }
 
 .logo{
