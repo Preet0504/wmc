@@ -32,6 +32,7 @@ def login():
         if check_user:
             if bcrypt.hashpw(request.form['password'].encode('utf-8'),check_user['password']) == check_user['password']:
                 print('User logged in successfully')
+                session['username']=request.form['username']
                 return redirect(url_for('home'))
             else:
                 print('fysoab')
@@ -60,6 +61,11 @@ def register():
 @app.route("/home")
 def home():
     return render_template('home.html')
+
+@app.route("/login")
+def logout():
+    session.pop()
+    return redirect(url_for('login'))
 
 app.debug = True
 app.run()
