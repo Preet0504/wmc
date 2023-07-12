@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/first.css')}}">
+    </head>
+    <body>
+        
+        
+        <div class="inside"><video playsinline autoplay muted loop poster="">
+            <source src="https://cdn-quidditchchampions.wbgames.com/home/hero-m.mp4?c=b" type="video/mp4">
+        </video>
+    <div class="video-overlay"></div>
+    </div>
+        <div class="logo">
+            <picture>
+                <source media="(min-width: 992px)" srcset="https://cdn-quidditchchampions.wbgames.com/static/logo-en-white.png" type="image/webp">
+                <img class="hero-logo img-fluid" src="https://cdn-quidditchchampions.wbgames.com/static/logo-en-white-m.png" alt="Harry Potter: Quidditch Champions">
+            </picture>
+            
+        </div>
+        <div class="wrap">
+        <a href="{{url_for('login')}}">
+            <button class="button">Login</button>
+        </a>
+        <a href="{{url_for('register')}}">
+            <button class="button">Sign up</button>
+        </a>
+        </div>
+        
+        <div class = "info">
+            <img src="https://i.ibb.co/Tq2TfRb/pngwing-com-1.png" alt="">
+            <h1>The Inter-House Quidditch Cup, also known as the Hogwarts Quidditch Cup or simply the Quidditch Cup, was awarded yearly at Hogwarts School of Witchcraft and Wizardry to the House Quidditch team  with the most total points.</h1>
+        </div>
+        
+        <script src="" async defer></script>
+    </body>
+</html>

@@ -1,0 +1,156 @@
+video {
+    object-fit: cover;
+    width: 99vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    
+  }
+
+.logo {
+  position: absolute;
+  width: 82vw;
+  height: 57vh;
+  top: -3%;
+  left: 51%;
+  transform: translateX(-50%);
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* border-style: solid;
+  border-color:#0b1b3d; */
+  
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(251, 251, 251, 0), rgb(0, 0, 0)); /* Adjust the gradient colors and transparency as desired */
+  z-index: 1;
+}
+
+.inside {
+  
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%);
+  display: flex;
+  flex-direction: column;
+}
+
+.wrap {
+  position: absolute;
+  top: 70%;
+  left: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button {
+  min-width: 300px;
+  min-height: 60px;
+  font-family: 'HarryPotter',Arial,sans-serif;
+  font-size: 30px;
+  text-transform: uppercase;
+  letter-spacing: 1.3px;
+  font-weight: 700;
+  color: #fff; /* Set the text color to white */
+  background-color: rgba(0, 0, 0, 0.5);
+  /* box-shadow: 12px 12px 24px rgba(80, 40, 243, 0.64); Set a dark box shadow */
+  transition: all 0.3s ease-in-out 0s;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  padding: 10px;
+  margin-left: 100px;
+  border:solid white;
+  border-radius: 1000px;
+}
+
+
+.button::before {
+  content: '';
+  border-radius: 1000px;
+  min-width: calc(300px + 12px);
+  min-height: calc(60px + 12px);
+  border: 6px solid #00FFCB;
+  box-shadow: 0 0 60px rgba(0, 255, 203, .64);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: all .3s ease-in-out 0s;
+}
+
+.button:hover, .button:focus {
+  color: #00FFCB;
+  transform: translateY(-6px);
+}
+
+button:hover::before, button:focus::before {
+  opacity: 1;
+}
+
+button::after {
+  content: '';
+  width: 30px; height: 30px;
+  border-radius: 100%;
+  border: 6px solid #00FFCB;
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: ring 1.5s infinite;
+}
+
+button:hover::after, button:focus::after {
+  animation: none;
+  display: none;
+}
+
+@keyframes ring {
+  0% {
+    width: 30px;
+    height: 30px;
+    opacity: 1;
+  }
+  100% {
+    width: 300px;
+    height: 300px;
+    opacity: 0;
+  }
+}
+
+.info{
+  position: absolute;
+  top:149.5%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  /* background-image:url("https://i.pinimg.com/originals/44/6e/3b/446e3b79395a287ca32f7977dd83b290.jpg"); */
+  text-align: center;
+  background: linear-gradient(rgb(0, 0, 0), rgb(3, 0, 18));
+  color: goldenrod; /* Set the text color to white */
+  font-family: 'HarryPotter',Arial,sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  font-style: italic;
+  letter-spacing: 2px;
+}
+
+
+@font-face {
+  font-family: 'HarryPotter';
+  src: url("/static/fonts/HarryP-MVZ6w.ttf") format('truetype');
+}
