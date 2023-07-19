@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Players</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/players.css')}}">
+</head>
+<body>
+
+    <div class="title">Players</div>
+
+    <div class="search">
+      <form method="POST" action="{{url_for('players')}}"  id="searchform">
+      <input class="search-bar" type="text" name="search" placeholder="Search">
+    </form>
+      <button class="search-button" type="submit" form="searchform">
+      <img class="search-icon" src="https://www.freeiconspng.com/thumbs/search-icon-png/search-icon-png-2.png">
+      <div class="tooltip">Search</div>
+      </button>
+    </div>
+
+
+    <div class="filter">
+        <h2>Filter</h2>
+        <form method="POST" action="{{url_for('players')}}">
+            <div class="filter-container">
+                <div class="houses-filter filter-section">
+                  <h3>Houses</h3>
+                  <div class="checkbox-group">
+                    <input type="checkbox" id="Gryffindor" name="house" value="Gryffindor">
+                    <label for="Gryffindor">Gryffindor</label><br>
+                    <input type="checkbox" id="Slytherin" name="house" value="Slytherin">
+                    <label for="Slytherin">Slytherin</label><br>
+                    <input type="checkbox" id="Hufflepuff" name="house" value="Hufflepuff">
+                    <label for="Hufflepuff">Hufflepuff</label><br>
+                    <input type="checkbox" id="Ravenclaw" name="house" value="Ravenclaw">
+                    <label for="Ravenclaw">Ravenclaw</label><br>
+                  </div>
+                </div>
+                <div class="positions-filter filter-section">
+                  <h3>Positions</h3>
+                  <div class="checkbox-group">
+                    <input type="checkbox" id="Seeker" name="position" value="Seeker">
+                    <label for="Seeker">Seeker</label><br>
+                    <input type="checkbox" id="Keeper" name="position" value="Keeper">
+                    <label for="Keeper">Keeper</label><br>
+                    <input type="checkbox" id="Chaser" name="position" value="Chaser">
+                    <label for="Chaser">Chaser</label><br>
+                    <input type="checkbox" id="Beater" name="position" value="Beater">
+                    <label for="Beater">Beater</label><br>
+                  </div>
+                </div>
+              </div>
+              
+              
+            <input type="submit" value = "Apply Filter">
+        </form>
+    </div>
+</body>
+</html>

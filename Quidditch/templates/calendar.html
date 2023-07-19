@@ -1,0 +1,23 @@
+<!-- calendar.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Events Calendar</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/calendar.css')}}">
+</head>
+<body>
+    <div class="calendar">
+        <h1>Events Calendar</h1>
+        <div class="events">
+            {% for event in events %}
+            <div class="event">
+                <h3> {{event['teamA']}} vs {{event['teamB']}} </h3>
+                <p> {{event['date']}} </p>
+                <p> This match will be legendary </p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
