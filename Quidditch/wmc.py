@@ -1,5 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session,Response
 from pymongo.mongo_client import MongoClient
+from bson.objectid import ObjectId
+from gridfs import GridFS
+from werkzeug.utils import secure_filename
+from pymongo.errors import InvalidDocument
 from pymongo.server_api import ServerApi
 import bcrypt
 import random
@@ -12,7 +16,7 @@ app.static_folder = 'static'
 
 
 # Create a new client and connect to the server
-client = MongoClient(uri, server_api=ServerApi('1'))
+client = MongoClient(uri,server_api=ServerApi('1'))
 
 # Send a ping to confirm a successful connection
 try:
@@ -22,6 +26,7 @@ except Exception as e:
     print(e)
 
 db = client['quidditch']
+fs = GridFS(db)
 @app.route("/")
 def first():
     return render_template('first.html')
@@ -163,18 +168,15 @@ def events():
     return render_template('calendar.html',events=events)
 
 
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}  # Allowed image extensions
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 @app.route('/home/team',methods=['GET','POST'])
 def team():
     assigned_house=""
     position_counts = {'Seeker':0,'Keeper':0,'Beater':0,'Chaser':0}
-    if 'g' not in session:
-        session['g']=0
-    if 's' not in session:
-        session['s']=0
-    if 'r' not in session:
-        session['r']=0
-    if 'h' not in session:
-        session['h']=0
+    
     if 'team' not in session:
         print('not working')
         session['team']=[]
@@ -188,23 +190,28 @@ def team():
         gender = request.form.get('gender')
         totalmatches = request.form['totalmatches']
         wins = request.form['wins']
-        
+
+        file = request.files['file']
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            
+        image_data = file.read()
+        player_id = str(ObjectId())
+
+
         broomstick = request.form['broomstick']
         house = ['Gryffindor','Slytherin','Hufflepuff','Ravenclaw']
         print(name,position)
-        registered_team = db['team_registration']
+        registered_team = db['images']
         if 'add' in request.form:
-            # check_player = team.find_one({"Name":name},{"Position":position})
-            
-            # if check_player:
-            #     return render_template('team-register.html',msg='Player already Exists')
-            # team.insert_one({"Name":name,"Position":position,"House":house[x]})
             temp = copy.deepcopy(session['team'])
             player_exists = any(player['Name'] == name and player['Position'] == position for player in temp)
             loses = int(totalmatches)-int(wins)
             if not player_exists and loses>=0:
                 print('ok')
-                temp.append({"Name": name, "Age":int(age), "Position": position, "Total Matches":int(totalmatches), "Wins":int(wins), "Loses":loses, "Broomstick":broomstick, "Gender":gender})
+                session['current_player'] = player_id
+                fs.put(image_data,filename=filename,player_id=player_id)
+                temp.append({"ID": player_id,"Name": name, "Age":int(age), "Position": position, "Total Matches":int(totalmatches), "Wins":int(wins), "Loses":loses, "Broomstick":broomstick, "Gender":gender})
                 session['team'] = temp
             for player in session['team']:
                 position = player['Position']
@@ -212,30 +219,27 @@ def team():
                     position_counts[position] += 1
                 else:
                     position_counts[position] = 1
+            
 
         elif 'register' in request.form:
             assigned_house = house[x]
             
             print(len(session['team']))
-            if(len(session['team'])==7):
-                if assigned_house == 'Gryffindor':
-                    session['g']+=1
-                    update = {'$set':{'House':assigned_house,'Id':session['g']}}
-                elif assigned_house == 'Slytherin':
-                    session['s']+=1
-                    update = {'$set':{'House':assigned_house,'Id':session['s']}}
-                elif assigned_house == 'Ravenclaw':
-                    session['r']+=1
-                    update = {'$set':{'House':assigned_house,'Id':session['r']}}
-                elif assigned_house == 'Hufflepuff':
-                    session['h']+=1
-                    update = {'$set':{'House':assigned_house,'Id':session['h']}}
-                registered_team.insert_many(session['team'])
-                filter={}
+            id = registered_team.find({"House":assigned_house},{"Id":1})
+            if(len(session['team'])== 1):
                 
-                registered_team.update_many(update=update,filter=filter)
+                z = []
+                for item in id:
+                    z.append(item["Id"])
+                z.append(0)
+                print(z)
+                y = max(z)+1
+                for new in session['team']:
+                    new['House']=assigned_house
+                    new['Id']=y
+                registered_team.insert_many(session['team'])
                 print('team registered successfully')
-                del session['team']
+                session['team'] = []
             else:
                 print('nothing happened')
 
@@ -244,6 +248,23 @@ def team():
               
 
     return render_template('team-register.html',teams=session['team'],position_counts=position_counts,assigned_house=assigned_house) 
+
+
+@app.route('/image/<player_id>')
+def get_image(player_id):
+    try:
+        # Retrieve the image data from MongoDB GridFS using player_id
+        image = fs.find_one({"player_id": player_id})
+        if image:
+            # Return the image data as binary
+            return Response(image.read(), content_type='image/jpeg')
+        else:
+            # Return a default image or an error message if the image is not found
+            # return send_file('path/to/default_image.jpg', mimetype='image/jpeg')
+            print("NO Image Found")
+    except Exception as e:
+        # Handle any errors that may occur during image retrieval
+        return str(e)
 
 app.debug = True
 app.run()
