@@ -11,7 +11,7 @@
     <h1>Quidditch Registration</h1>
     </div>
     <div class="form-container">
-    <form action="{{url_for('team')}}" method="post">
+    <form action="{{url_for('team')}}" method="post" enctype="multipart/form-data">
         <label for="playerName">Player Name:</label>
         <input type="text" name="name" autocomplete="off" required>
 
@@ -54,6 +54,17 @@
 
         <label for="wins">Wins:</label>
         <input type="number" name="wins" required>
+
+        <!-- <h1>Upload an Image</h1> -->
+        <label for="file">Upload Player's Image:</label>
+        <input type="file" name="file" accept="image/*">
+        
+
+       <!-- Display uploaded image if available -->
+            <img src="{{ url_for('get_image', player_id=teams['ID']) }}" alt="Player Image">
+
+
+
         <div class="btn-container">
         <input type="submit" name="add" value="Add Player" >
         <input type="submit" name="register" value="Register" onclick="removeRequired()">
@@ -61,6 +72,7 @@
     </div>
     </form>
 </div>
+    
 
     <div class="team-info">
         <h2>Your Team</h2>
@@ -80,6 +92,7 @@
                     <th>{{team['Position']}}</th>
                     <th>{{team['Age']}}</th>
                     <th>{{team['Gender']}}</th>
+                    <th><img src="{{ url_for('get_image', player_id=team['ID']) }}" alt="Player img"></th>
                 </tr>
             </thead>
             {%endfor%}
