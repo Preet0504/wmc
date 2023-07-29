@@ -1,0 +1,51 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+.team-container{
+    display: flex;
+    justify-content: space-between;
+    /* flex-direction: row; */
+    /* background-color: antiquewhite; */
+}
+
+.team{
+    width: 45%;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.players{
+    display: flex;
+    flex-direction: column;
+}
+
+.player{
+    background-color: pink;
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    /* height: 250px; */
+}
+
+.img-container{
+    /* background-color: aqua; */
+    width: 200px;
+    height: 200px;
+    margin-right: 100px;
+    margin-top: 15px;
+    margin-left: 10px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    /* background-color: black; */
+}

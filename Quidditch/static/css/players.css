@@ -1,0 +1,191 @@
+body {
+    font-family: "TimesNewRoman";
+    background-color: #2C353E;
+    margin: 0;
+    padding: 20px;
+    color: #FFF;
+    text-align: center;
+    font-size: 20px;
+  }
+  /* Container for the checkbox divs */
+.filter-container {
+    display: flex; /* Display divs side by side */
+    gap: 20px; /* Adjust as needed */
+    margin-left: 38%;
+  }
+  
+  /* Filter section styles */
+  .filter-section {
+    background-color: #4A637D;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center checkboxes vertically */
+  }
+  
+  /* Checkbox group styles */
+  .checkbox-group {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center checkboxes horizontally */
+  }
+  
+  /* Checkbox styles */
+  input[type="checkbox"] {
+    display: none; /* Hide the default checkbox */
+  }
+  
+  /* Checkbox label styles */
+  label {
+    position: relative;
+    padding-left: 30px; /* Adjust as needed */
+    cursor: pointer;
+  }
+  
+  /* Custom checkbox */
+  label::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 18px; /* Adjust as needed */
+    height: 18px; /* Adjust as needed */
+    border: 2px solid #333;
+    background-color: #fff;
+    border-radius: 4px;
+  }
+  
+  /* Checked state */
+  input[type="checkbox"]:checked + label::before {
+    background-color: #ffc107; /* Change to desired color */
+  }
+  
+  /* Checkmark styles */
+  label::after {
+    content: "\2713"; /* Unicode checkmark character */
+    position: absolute;
+    left: 4px; /* Adjust as needed */
+    top: 3px; /* Adjust as needed */
+    font-size: 14px; /* Adjust as needed */
+    color: #333; /* Change to desired color */
+    visibility: hidden;
+  }
+  
+  /* Checked state */
+  input[type="checkbox"]:checked + label::after {
+    visibility: visible;
+  }
+  
+  /* Hover state */
+  label:hover::before {
+    border-color: #666; /* Change to desired color */
+  }
+  
+  /* Optional: Styles for the filter sections */
+  h3 {
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration-line: underline;
+  }
+  
+  
+  .title {
+    background-color: #4A637D;
+    font-size: 50px;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .search-bar {
+    flex: 1;
+    height: 35px;
+    width: 250%;
+    padding-left: 10px;
+    font-size: 16px;
+    border: none;
+    background-color: #FFF;
+    color: #333;
+    border-radius: 2px;
+    box-shadow: inset 1px 2px 3px rgba(0,0,0,0.05);
+    
+    
+  }
+  
+  .search-bar::placeholder {
+    font-family: "Roboto", Arial;
+    font-size: 14px;
+  }
+  
+  .search-button {
+    height: 39px;
+    width: 64px;
+    background-color: #4A637D;
+    border: none;
+    margin-left: 250px;
+    margin-right: 10px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+  }
+  
+  .search-icon {
+    height: 25px;
+  }
+  
+  .search-button .tooltip {
+    position: absolute;
+    background-color: #4A637D;
+    color: #FFF;
+    padding: 7px;
+    border-radius: 2px;
+    font-size: 12px;
+    bottom: -35px;
+    opacity: 0;
+    transition: opacity 0.15s;
+    pointer-events: none;
+    white-space: nowrap;
+    font-family: "Roboto", Arial;
+  }
+  
+  .search-button {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .search {
+    flex: 1;
+    margin-left: 32%;
+    margin-right: 35px;
+    max-width: 500px;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .search-button:hover .tooltip {
+    opacity: 1;
+  }
+  input[type="submit"] {
+    margin-top: 70px;
+    padding: 10px 20px;
+    font-size: 20px;
+    width: 25vb;
+    background-color: #4A637D;
+    color: #FFF;
+    border: none;
+    cursor: pointer;
+  }
+  
+  @font-face {
+    font-family: 'HarryPotter';
+    src: url('/static/fonts/HarryP-MVZ6w.ttf') format('truetype');
+  }
