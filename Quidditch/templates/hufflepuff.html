@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/houseS.css')}}">
+    </head>
+    <body class="hufflepuff">
+        <!-- <div class="img-container">
+            <img  src="https://e1.pxfuel.com/desktop-wallpaper/842/496/desktop-wallpaper-slytherin-quidditch-slytherin.jpg" alt="">
+            <img  src="https://lh3.googleusercontent.com/0YiApMHe7p_rMza2gqakDFIC25EgrSKDjoBWkM4loKbJyqeO2Hw3OtBF4tb5iz0hfUFEa5gj1nNanYOFnaz9VI_6=w640-h400-e365-rj-sc0x00fffff" alt="">
+        </div> -->
+        {% for id in players%}
+        <form action="{{url_for('hteam')}}" method="post">
+            <input type="hidden" name= "Id" value="{{id['Id']}}">
+            <button type="submit">Team{{id['Id']}}</button>
+        </form>
+        {%endfor%}
+        
+    </body>
+</html>

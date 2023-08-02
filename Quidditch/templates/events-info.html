@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/events-info.css')}}">
+    <title>Teams Info</title>
+</head>
+<body>
+    <div class="team-container">
+        <div class="team">
+            <div class="team-title"><h1>{{teamA_detail['House']}}&nbsp;{{teamA_detail['Id']}}</h1></div>
+            <div class="team-info">
+                <h4>Total Matches: {{teamA_detail['Total Matches']}}</h4>
+                <h4>Wins: {{teamA_detail['Wins']}}</h4>
+                <h4>Loses: {{teamA_detail['Loses']}}</h4>
+            </div>
+            {%for player in playerA%}
+            <form action="{{url_for('players_info')}}" method="post">
+                <input type="hidden" name="Name" value="{{player['Name']}}">
+            <div class="players">
+
+
+                <div class="player">
+                    <div class="img-container" style="background-image: url({{ url_for('get_image', player_id=player['ID']) }});"></div>
+                    <div class="player-info">
+                        <h3>{{player['Name']}} </h3>
+                        <h3>{{player['Position']}} </h3>
+                        <input type="submit" value="View Player">
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </form>
+            {%endfor%}
+
+        </div>
+
+
+        <div class="team">
+            <div class="team-title"><h1>{{teamB_detail['House']}}&nbsp;{{teamB_detail['Id']}}</h1></div>
+            <div class="team-info">
+                <h4>Total Matches: {{teamA_detail['Total Matches']}}</h4>
+                <h4>Wins: {{teamA_detail['Wins']}}</h4>
+                <h4>Loses: {{teamA_detail['Loses']}}</h4>
+            </div>
+            {%for player in playerB%}
+            <form action="{{url_for('players_info')}}" method="post">
+                <input type="hidden" name="Name" value="{{player['Name']}}">
+            <div class="players">
+
+
+                <div class="player">
+                    <div class="img-container" style="background-image: url({{ url_for('get_image', player_id=player['ID']) }});"></div>
+                    <div class="player-info">
+                        <h3>{{player['Name']}} </h3>
+                        <h3>{{player['Position']}} </h3>
+                        <input type="submit" value="View Player">
+                    </div>
+                    
+                </div>
+                
+            </div>
+            
+            </form>
+            {%endfor%}
+
+
+
+
+            </div>
+
+        </div>
+    </div>
+    
+</body>
+</html>
