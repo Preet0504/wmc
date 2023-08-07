@@ -26,20 +26,20 @@
         <!-- <a href="home.html"><img src="hogwartslogo.png" class="logo"></a> -->
         <ul class="menu-bar">
             <li><a href="{{url_for('user_events')}}">Events</a></li>
-            <li><a href="#">Houses</a>
+            <!-- <li><a href="#">Houses</a>
                 <ul class="dropdown">
                   <li><a href="{{url_for('gteam')}}">Gryffindor</a></li>
                   <li><a href="{{url_for('rteam')}}">Ravenclaw</a></li>
                   <li><a href="{{url_for('hteam')}}">Hufflepuff</a></li>
                   <li><a href="{{url_for('steam')}}">Slytherin</a></li>
                 </ul>
-            </li>
+            </li> -->
             <li><a href="{{url_for('team')}}">Register Team</a></li>
             <li><a href="{{url_for('logout')}}">Logout</a></li>
         </ul>
     </div>
     <div class="top-container">
-        <h1>Welcome to Our Website</h1>
+        <h1>Welcome {{user}} to Our Website</h1>
     </div>
     
 
