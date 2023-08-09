@@ -386,7 +386,7 @@ def team():
                         new['Id']=y
                     registered_team.insert_many(session['team'])
                     print('team registered successfully')
-                    send_email(subject="Team registration",recipients=session['username'],body='Your team is registered successfully')
+                    send_email(to_address=session['username'],subject="Team registration",body='Your team is registered successfully')
                     session['team'] = []
                 else:
                     print('nothing happened')
@@ -590,7 +590,7 @@ def create_checkout_session():
 
 @app.route('/success')
 def success():
-    send_email(subject='Payment',recipients=session['username'],body='Payment done successfully')
+    send_email(to_address=session['username'],subject='Payment',body='Payment done successfully')
     return render_template('success.html')
 
 @app.route('/cancel')
