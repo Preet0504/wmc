@@ -590,7 +590,7 @@ def create_checkout_session():
 
 @app.route('/success')
 def success():
-    send_email(to_address=session['username'],subject='Payment',body='Payment done successfully')
+    #send_email(to_address=session['username'],subject='Payment',body='Payment done successfully')
     return render_template('success.html')
 
 @app.route('/cancel')
