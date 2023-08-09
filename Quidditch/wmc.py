@@ -253,10 +253,10 @@ def admin():
                 if not check_event and check_A and check_B:
                     admin.insert_one({'teamA':teamA,'teamA_id':Aid,'teamB':teamB,'teamB_id':Bid,'date':date})
                     msg = "Schedule added successfully"
-                    event_description = '{} vs {} happening on {}. Book your tickets now'.format(teamA,teamB,date)
+                    event_description = '{} {} vs {} {} happening on {}. Book your tickets now'.format(teamA,Aid,teamB,Bid,date)
                     send_event_notification(event_description=event_description)
                 else:
-                    msg = "event already exists mf or no such team exists mf"
+                    msg = "event already exists or no such team exists"
                 
             elif 'remove' in request.form:
                 check_event = admin.find_one({'teamA':teamA,'teamA_id':Aid,'teamB':teamB,'teamB_id':Bid,'date':date})
@@ -264,7 +264,7 @@ def admin():
                     admin.delete_one({'teamA':teamA,'teamA_id':Aid,'teamB':teamB,'teamB_id':Bid,'date':date})
                     msg = "Schedule removed successfully"
                 else:
-                    msg = "No such event exists mf"
+                    msg = "No such event exists"
             else:
                 msg=''
                 print('Nothing Happened')
@@ -386,6 +386,7 @@ def team():
                         new['Id']=y
                     registered_team.insert_many(session['team'])
                     print('team registered successfully')
+                    send_email(subject="Team registration",recipients=session['username'],body='Your team is registered successfully')
                     session['team'] = []
                 else:
                     print('nothing happened')
@@ -563,7 +564,7 @@ def update_stats():
 
 public_key = "pk_test_51NZl8bSJIq2XxF7LxWUfY06w9BDfJCd2gRqvf7aAeYSxp3irUAk3i8gXDgVJqVOGv9TdacAUEUUSwEIaQA8Dm4Fi00AbxsADFn"
 stripe.api_key = 'sk_test_51NZl8bSJIq2XxF7LLOONAsEvptriH1V2Cyu0SQP6Fen3HO2fgRYc004WEtnpnc5SDYo2vCb0q7rbJn5V0Uok7fws00WboSbcon'
-YOUR_DOMAIN = 'http://127.0.0.1:5000'
+YOUR_DOMAIN = 'https://hpquidditch.onrender.com/'
 # YOUR_DOMAIN = 'http://localhost:4242'
 
 
@@ -579,8 +580,8 @@ def create_checkout_session():
                 },
             ],
             mode='payment',
-            success_url=YOUR_DOMAIN + '/success',
-            cancel_url=YOUR_DOMAIN + '/cancel',
+            success_url=YOUR_DOMAIN + 'success',
+            cancel_url=YOUR_DOMAIN + 'cancel',
         )
     except Exception as e:
         return str(e)
@@ -589,6 +590,7 @@ def create_checkout_session():
 
 @app.route('/success')
 def success():
+    send_email(subject='Payment',recipients=session['username'],body='Payment done successfully')
     return render_template('success.html')
 
 @app.route('/cancel')
