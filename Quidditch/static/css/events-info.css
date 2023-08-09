@@ -1,6 +1,9 @@
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
+  background:black;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: 'HarryPotter', sans-serif;
+  
 }
 
 .team-container{
@@ -8,12 +11,12 @@ body {
     justify-content: space-between;
     /* flex-direction: row; */
     /* background-color: antiquewhite; */
+    color: white;
+    font-size: 30px;
 }
 
 .team{
     width: 45%;
-  background-color: #fff;
-  border: 1px solid #ccc;
   padding: 15px;
   margin-bottom: 20px;
 }
@@ -24,11 +27,13 @@ body {
 }
 
 .player{
-    background-color: pink;
+    background-color: rgba(255, 192, 203, 0);
     display: flex;
     flex-direction: row;
     margin-top: 20px;
     margin-bottom: 20px;
+    color: goldenrod;
+    border: solid 5px goldenrod;
     /* height: 250px; */
 }
 
@@ -49,3 +54,26 @@ body {
     background-repeat: no-repeat;
     /* background-color: black; */
 }
+input[type="submit"] {
+    margin-left: 10px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    background-color: #ffc700;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    transition: background-color 0.3s;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+  }
+  input[type="submit"]:hover {
+    background-color: #f8b700;
+  }
+
+@font-face {
+    font-family: 'HarryPotter';
+    src: url('/static/fonts/HarryP-MVZ6w.ttf') format('truetype');
+  }
